@@ -1,0 +1,29 @@
+﻿@model Pinboard.Models.Pin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Pin</legend>
+
+    <div>
+        Type: @Html.DisplayFor(model => model.Type.Name)
+    </div>
+
+    <div class="display-field">
+        Title: @Html.DisplayFor(model => model.Title)
+    </div>
+    <div>
+        Url: @Model.Url 
+    </div>
+    <div>
+        User: @Model.User.UserName
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PinId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
