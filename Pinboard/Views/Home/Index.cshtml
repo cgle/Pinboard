@@ -1,45 +1,103 @@
-﻿@{
+﻿@model IEnumerable<Pinboard.Models.Pin>
+
+@{
     ViewBag.Title = "Home Page";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
-        </div>
-    </section>
+@section header {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
+    <style type="text/css">
+        .jumbotron {
+            padding: 20px;
+        }
+
+        .btn-group {
+            margin-right: 20px;
+        }
+    </style>
 }
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+@if (ViewBag.Logged == true) {
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Pinboard</h3>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group" id="dropdown-home">
+                <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                    Choose a pinboard <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/">All pinboards</a></li>
+                    @foreach (var item in ViewBag.Boards)
+                    {
+                        <li><a href="/?board=@item.BoardId">@item.Title</a></li>
+                         
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-warning" type="button" onclick="location.href='/board/create'">Create new board</button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" type="button" onclick="location.href='/pin/create'">Create new pin</button>
+        </div>
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+    </div>
+</div>
+}
+
+<div class="container">
+    <div class="row">
+        <div id="video" class="col-md-4">
+            @foreach (var item in Model)
+            {
+                if (item.Type.Name == "Video")
+                {
+                <div class="panel">
+                    <embed
+                    width="350" height="225"
+                    src="http://www.youtube.com/v/@item.Url.Substring(31, 11)"
+                    type="application/x-shockwave-flash">
+                    </embed>
+                </div>
+                }
+            }
+        </div>
+        <div id="picture" class="col-md-4">
+            @foreach (var item in Model)
+            {
+                if (item.Type.Name == "Picture")
+                {
+                <div class="panel">
+                    <img width="350" src = "@item.Url"
+                     alt = "@item.Title" />
+                </div>
+                }
+            }
+        </div>
+        <div id="audio" class="col-md-4">
+            @foreach (var item in Model)
+            {
+                if (item.Type.Name == "Audio")
+                {
+                <div class="panel">
+                    <h3>
+                        <div class="label label-primary"><b>@item.Title</b></div>
+                    </h3>
+                    <audio class="audio" controls>
+                        <source src="@item.Url" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+

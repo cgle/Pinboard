@@ -4,13 +4,12 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit pin</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Pin</legend>
 
         @Html.HiddenFor(model => model.PinId)
 
@@ -44,8 +43,9 @@
             @Html.EditorFor(model => model.Url)
             @Html.ValidationMessageFor(model => model.Url)
         </div>
+        <br />
         <p>
-            <input type="submit" value="Save" />
+            <input class="btn btn-warning" type="submit" value="Save" />
         </p>
     </fieldset>
 }

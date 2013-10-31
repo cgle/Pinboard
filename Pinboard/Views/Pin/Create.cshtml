@@ -4,13 +4,12 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create new pin</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Pin</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.TypeId, "Type")
@@ -45,9 +44,9 @@
             @Html.ValidationMessageFor(model => model.Url)
         </div>
 
-
+        <br />
         <p>
-            <input type="submit" value="Create" />
+            <input class="btn btn-primary" type="submit" value="Create" />
         </p>
     </fieldset>
 }
