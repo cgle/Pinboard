@@ -1,0 +1,23 @@
+﻿@model Pinboard.Models.Board
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<hr />
+<fieldset>
+    <legend>Board</legend>
+
+    <div class="display-field">
+        <b>Title: </b>@Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-field">
+        <b>Description: </b>@Html.DisplayFor(model => model.Description)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BoardId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

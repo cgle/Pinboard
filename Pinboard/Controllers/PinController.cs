@@ -21,7 +21,7 @@ namespace Pinboard.Controllers
 
         public ActionResult Index(string username)
         {
-            var pins = db.Pins.Include(p => p.Type).Include(p => p.User);
+            var pins = db.Pins.Include(p => p.Type).Include(p => p.User).Include(p => p.Board);
             if (WebSecurity.IsAuthenticated == true  || String.IsNullOrEmpty(username) == false)
             {
                 if (String.IsNullOrEmpty(username)) { pins = pins.Where(p => p.User.UserName == WebSecurity.CurrentUserName); }
@@ -35,7 +35,7 @@ namespace Pinboard.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            var pins = db.Pins.Include(p => p.User).Include(p => p.Type);
+            var pins = db.Pins.Include(p => p.User).Include(p => p.Board).Include(p => p.Type);
             Pin pin = pins.Single(p => p.PinId == id);
 
             if (pin == null)
@@ -51,6 +51,7 @@ namespace Pinboard.Controllers
         public ActionResult Create()
         {
             ViewBag.TypeId = new SelectList(db.Types, "TypeId", "Name");
+            ViewBag.BoardId = new SelectList(db.Boards.Where(u => u.User.UserId == WebSecurity.CurrentUserId), "BoardId", "Title");
             return View();
         }
 
@@ -69,6 +70,7 @@ namespace Pinboard.Controllers
             }
 
             ViewBag.TypeId = new SelectList(db.Types, "TypeId", "Name", pin.TypeId);
+            ViewBag.BoardId = new SelectList(db.Boards.Where(u => u.User.UserId == WebSecurity.CurrentUserId), "BoardId", "Title", pin.Board.BoardId);
             return View(pin);
         }
 
@@ -77,12 +79,14 @@ namespace Pinboard.Controllers
         [Authorize]
         public ActionResult Edit(int id = 0)
         {
-            Pin pin = db.Pins.Find(id);
+            var pins = db.Pins.Include(u => u.User).Include(b => b.Board);
+            Pin pin = pins.Single(p => p.PinId == id);
             if (pin == null)
             {
                 return HttpNotFound();
             }
             ViewBag.TypeId = new SelectList(db.Types, "TypeId", "Name", pin.TypeId);
+            ViewBag.BoardId = new SelectList(db.Boards.Where(u => u.User.UserId == WebSecurity.CurrentUserId), "BoardId", "Title", pin.Board.BoardId);
             return View(pin);
         }
 
@@ -99,6 +103,7 @@ namespace Pinboard.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TypeId = new SelectList(db.Types, "TypeId", "Name", pin.TypeId);
+            ViewBag.BoardId = new SelectList(db.Boards.Where(u => u.User.UserId == WebSecurity.CurrentUserId), "BoardId", "Title", pin.Board.BoardId);
             return View(pin);
         }
 

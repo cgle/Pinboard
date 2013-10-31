@@ -18,8 +18,16 @@
             @Html.LabelFor(model => model.TypeId, "Type")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("TypeId", String.Empty)
+            @Html.DropDownList("TypeId", "Select")
             @Html.ValidationMessageFor(model => model.TypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.Label("Board:")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("BoardId", "Select")
+            @Html.ValidationMessageFor(model => model.Board.BoardId)
         </div>
 
         <div class="editor-label">

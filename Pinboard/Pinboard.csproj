@@ -162,13 +162,20 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PinController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310300639116_migration1.cs" />
+    <Compile Include="Migrations\201310300639116_migration1.Designer.cs">
+      <DependentUpon>201310300639116_migration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Pin.cs" />
     <Compile Include="Models\PinboardEntities.cs" />
     <Compile Include="Models\Type.cs" />
@@ -290,12 +297,22 @@
     <Content Include="Views\Pin\Create.cshtml" />
     <Content Include="Views\Pin\Edit.cshtml" />
     <Content Include="Views\Pin\Delete.cshtml" />
+    <Content Include="Views\Board\Index.cshtml" />
+    <Content Include="Views\Board\Details.cshtml" />
+    <Content Include="Views\Board\Create.cshtml" />
+    <Content Include="Views\Board\Edit.cshtml" />
+    <Content Include="Views\Board\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201310300639116_migration1.resx">
+      <DependentUpon>201310300639116_migration1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

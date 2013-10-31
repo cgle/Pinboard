@@ -17,6 +17,7 @@ namespace Pinboard.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public List<Pin> Pins { get; set; }
+        public List<Board> Boards { get; set; }
     }
 
     public class RegisterExternalLoginModel

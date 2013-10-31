@@ -9,10 +9,12 @@
 <fieldset>
     <legend>Pin</legend>
 
+@*    <div>
+        Type: @Model.Type.Name
+    </div>*@
     <div>
-        Type: @Html.DisplayFor(model => model.Type.Name)
+        Board: @Model.Board.Title
     </div>
-
     <div class="display-field">
         Title: @Html.DisplayFor(model => model.Title)
     </div>

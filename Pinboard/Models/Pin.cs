@@ -12,6 +12,7 @@ namespace Pinboard.Models
         public string Title { get; set; }
         public string Url { get; set; }
         public Type Type { get; set; }
+        public Board Board { get; set; }
         public UserProfile User { get; set; }
     }
 }

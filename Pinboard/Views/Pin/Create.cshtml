@@ -16,8 +16,16 @@
             @Html.LabelFor(model => model.TypeId, "Type")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("TypeId", String.Empty)
+            @Html.DropDownList("TypeId", "Select")
             @Html.ValidationMessageFor(model => model.TypeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Board, "Board")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model=>model.Board.BoardId, ViewBag.BoardId as SelectList, "Select")
+            @Html.ValidationMessageFor(model => model.Board.BoardId)
         </div>
 
         <div class="editor-label">
@@ -31,10 +39,13 @@
         <div class="editor-label">
             @Html.LabelFor(model => model.Url)
         </div>
+
         <div class="editor-field">
             @Html.EditorFor(model => model.Url)
             @Html.ValidationMessageFor(model => model.Url)
         </div>
+
+
         <p>
             <input type="submit" value="Create" />
         </p>
