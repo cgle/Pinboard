@@ -17,9 +17,15 @@ namespace Pinboard.Controllers
         //
         // GET: /Board/
 
-        public ActionResult Index()
+        public ActionResult Index(string username)
         {
-            return View(db.Boards.ToList());
+            var boards = db.Boards.Include(p => p.User).Include(p => p.Pins);
+            if (WebSecurity.IsAuthenticated == true || String.IsNullOrEmpty(username) == false)
+            {
+                if (String.IsNullOrEmpty(username)) { boards = boards.Where(p => p.User.UserName == WebSecurity.CurrentUserName); }
+                else { boards = boards.Where(p => p.User.UserName == username); }
+            }
+            return View(boards.ToList());
         }
 
         //

@@ -9,6 +9,7 @@ namespace Pinboard.Models
     {
         public int PinId { get; set; }
         public int TypeId { get; set; }
+        public int BoardId { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
         public Type Type { get; set; }

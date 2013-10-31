@@ -24,7 +24,7 @@
             @Html.LabelFor(model => model.Board, "Board")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model=>model.Board.BoardId, ViewBag.BoardId as SelectList, "Select")
+            @Html.DropDownList("BoardId" , "Select")
             @Html.ValidationMessageFor(model => model.Board.BoardId)
         </div>
 
